@@ -14,6 +14,29 @@
     
     // Initiate the wowjs
     new WOW().init();
+    //chat bot
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const chatbotBtn = document.getElementById("chatbot-btn");
+    
+        chatbotBtn.addEventListener("click", function () {
+            // Check if chatbot is already added
+            if (!document.querySelector("df-messenger")) {
+                const chatbotContainer = document.createElement("div");
+                chatbotContainer.innerHTML = `
+                    <df-messenger
+                      intent="WELCOME"
+                      chat-title="HealthcareFAQBot"
+                      agent-id="8a14a919-7330-40e6-9c19-a34c6cf6dbd6"
+                      language-code="en">
+                    </df-messenger>
+                    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"><\/script>
+                `;
+    
+                document.body.appendChild(chatbotContainer); // Add chatbot to the page
+            }
+        });
+    });
 
 
     // Sticky Navbar
