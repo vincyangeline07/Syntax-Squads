@@ -1,9 +1,9 @@
-git stayus<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>HealthCare</title>
+    <title>HealthCare </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -64,9 +64,6 @@ git stayus<!DOCTYPE html>
                 <a href="index.html" class="nav-item nav-link">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="service.html" class="nav-item nav-link">Service</a>
-               
-                        
-                      
                 
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
@@ -114,58 +111,60 @@ git stayus<!DOCTYPE html>
     <div class="container-fluid bg-primary bg-appointment mb-5 wow fadeInUp" data-wow-delay="0.1s" style="margin-top: 90px;">
         <div class="container">
             <div class="row gx-5">
-                <div class="col-lg-6 py-5">
-                    <div class="py-5">
-                        <h1 class="display-5 text-white mb-4">We Are A Certified and Award Winning Dental Clinic You Can Trust</h1>
-                        <p class="text-white mb-0">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd ipsum. Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos vero eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna sit. Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
-                    </div>
-                </div>
+                <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                    <img src="img/app.jpg" alt="Appointment Illustration" class="img-fluid rounded">
+                </div> 
                 <div class="col-lg-6">
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Make Appointment</h1>
-                        <form>
+                        <form id="appointmentForm">
                             <div class="row g-3">
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select bg-light border-0" style="height: 55px;">
-                                        <option selected>Select A Service</option>
-                                        <option value="1">Service 1</option>
-                                        <option value="2">Service 2</option>
-                                        <option value="3">Service 3</option>
-                                    </select>
+                                    <input type="text" id="hospitalName" class="form-control bg-light border-0" placeholder="Hospital Name" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select bg-light border-0" style="height: 55px;">
-                                        <option selected>Select Doctor</option>
-                                        <option value="1">Doctor 1</option>
-                                        <option value="2">Doctor 2</option>
-                                        <option value="3">Doctor 3</option>
-                                    </select>
+                                    <input type="text" id="userName" class="form-control bg-light border-0" placeholder="Your Name" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control bg-light border-0" placeholder="Your Name" style="height: 55px;">
+                                    <input type="text" id="userPhone" class="form-control bg-light border-0" placeholder="Your Phone" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control bg-light border-0" placeholder="Your Email" style="height: 55px;">
+                                    <input type="text" id="userAddress" class="form-control bg-light border-0" placeholder="Your Address" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control bg-light border-0 datetimepicker-input"
-                                            placeholder="Appointment Date" data-target="#date1" data-toggle="datetimepicker" style="height: 55px;">
-                                    </div>
+                                    <input type="date" id="appointmentDate" class="form-control bg-light border-0" required>
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <div class="time" id="time1" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control bg-light border-0 datetimepicker-input"
-                                            placeholder="Appointment Time" data-target="#time1" data-toggle="datetimepicker" style="height: 55px;">
-                                    </div>
+                                    <input type="time" id="appointmentTime" class="form-control bg-light border-0" required>
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-dark w-100 py-3" type="submit">Make Appointment</button>
                                 </div>
                             </div>
                         </form>
+                        <script>
+                            document.getElementById("appointmentForm").addEventListener("submit", async function(event) {
+                                event.preventDefault();
+                        
+                                let appointment = {
+                                    hospital: document.getElementById("hospitalName").value,
+                                    name: document.getElementById("userName").value,
+                                    phone: document.getElementById("userPhone").value,
+                                    address: document.getElementById("userAddress").value,
+                                    date: document.getElementById("appointmentDate").value,
+                                    time: document.getElementById("appointmentTime").value
+                                };
+                        
+                                let response = await fetch("http://localhost/telemedicine-php/appointments.php", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify(appointment)
+                                });
+                        
+                                let result = await response.json();
+                                alert(result.message);
+                            });
+                            </script>
                     </div>
                 </div>
             </div>
@@ -188,8 +187,10 @@ git stayus<!DOCTYPE html>
         </div>
     </div>
     <!-- Newsletter End -->
- <!-- Footer Start -->
- <div class="container-fluid bg-dark text-light py-5 wow fadeInUp footer-section" data-wow-delay="0.3s">
+    
+
+    <!-- Footer Start -->
+<div class="container-fluid bg-dark text-light py-5 wow fadeInUp footer-section" data-wow-delay="0.3s">
     <div class="container pt-5">
         <div class="row g-5 pt-4">
             <!-- Quick Links -->
@@ -198,7 +199,7 @@ git stayus<!DOCTYPE html>
                 <div class="d-flex flex-column justify-content-start">
                     <a class="text-light mb-2" href="index.html"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
                     <a class="text-light mb-2" href="about.html"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
-                    <a class="text-light mb-2" href="service.html"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
+                    <a class="text-light mb-2" href="service.html"><i class="bi bi-arrow-right text-primary me-2"></i>Health Tips</a>
                     <a class="text-light" href="contact.html"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
                 </div>
             </div>
@@ -227,7 +228,6 @@ git stayus<!DOCTYPE html>
         </div>
     </div>
 </div>
-
 <!-- Footer End -->
 
     <!-- Back to Top -->
@@ -249,6 +249,34 @@ git stayus<!DOCTYPE html>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+        document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent page reload
+        
+            // Get form values
+            let hospital = document.getElementById("hospitalName").value;
+            let name = document.getElementById("userName").value;
+            let phone = document.getElementById("userPhone").value;
+            let address = document.getElementById("userAddress").value;
+            let date = document.getElementById("appointmentDate").value;
+            let time = document.getElementById("appointmentTime").value;
+        
+            // Simulate form submission (Replace with backend API or email service)
+            console.log("Appointment Booked:");
+            console.log("Hospital:", hospital);
+            console.log("Name:", name);
+            console.log("Phone:", phone);
+            console.log("Address:", address);
+            console.log("Date:", date);
+            console.log("Time:", time);
+        
+            alert("Your appointment has been booked successfully!");
+        
+            // Clear form fields
+            document.getElementById("appointmentForm").reset();
+        });
+        </script>
+        
 </body>
 
 </html>
